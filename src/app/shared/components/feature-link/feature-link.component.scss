@@ -1,0 +1,12 @@
+::ng-deep {
+  a.nav-link.feature-link-item > span:hover > span.svg-icon svg g [fill] {
+    fill: #ffffff !important;
+    transition: fill 0.3s ease 0s;
+  }
+}
+
+a.feature-link-item {
+  span.title {
+    color: #6D7078;
+  }
+}

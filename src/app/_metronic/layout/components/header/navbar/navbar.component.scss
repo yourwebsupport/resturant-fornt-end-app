@@ -1,0 +1,87 @@
+@mixin module-selector-popup-size($size: 1, $unit: 162.5, $max: $size) {
+  &.feature-size-#{$size} {
+    width: ($max * $unit) + 32.68px;
+  }
+}
+
+@media (min-width: 991.98px) {
+  .user-panel span.designation{
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 719.98px) {
+  .module-selector-popup {
+    @include module-selector-popup-size(1, 149);
+    @include module-selector-popup-size(2, 149);
+    @include module-selector-popup-size(3, 149, 2);
+    @include module-selector-popup-size(4, 149, 2);
+  }
+}
+
+@media (min-width: 720px) and (max-width: 991.98px) {
+  .module-selector-popup {
+    @include module-selector-popup-size(1, 150);
+    @include module-selector-popup-size(2, 150);
+    @include module-selector-popup-size(3, 150);
+    @include module-selector-popup-size(4, 150, 3);
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1149.98px) {
+  .module-selector-popup {
+    @include module-selector-popup-size(3);
+    @include module-selector-popup-size(4, 162.5, 3);
+  }
+}
+@media (min-width: 1150px) {
+  .module-selector-popup {
+    @include module-selector-popup-size(3);
+    @include module-selector-popup-size(4);
+  }
+}
+.module-selector-popup{
+  top: 10px!important;
+  @include module-selector-popup-size();
+  @include module-selector-popup-size(2);
+  div.arrow{
+    position: absolute;
+    right: 36px;
+  }
+
+  div.arrow:before {
+    box-sizing: border-box;
+    position: absolute;
+    top: -10px;
+    display: inline-block;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #FFFFFF;
+    border-left: 10px solid transparent;
+    content: '';
+  }
+
+  div.arrow:after {
+    box-sizing: border-box;
+    position: absolute;
+    top: -9px;
+    left: 1px;
+    display: inline-block;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #ffffff;
+    border-left: 9px solid transparent;
+    content: '';
+  }
+}
+
+.notification-count{
+  &.more-then-99{
+    font-size: .65rem;
+  }
+  position: absolute;
+  top: -4px;
+  right: 0;
+  font-size: .9rem;
+}

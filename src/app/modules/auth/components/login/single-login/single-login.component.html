@@ -1,0 +1,120 @@
+<div class="font-login h-100 bg-brac pt-10">
+<!--    <ng-container *ngIf="!hasError">-->
+<!--      <div class="mb-5 bg-light-info p-3 rounded">-->
+<!--        <div class="text-info">-->
+<!--          Use account <strong>{{ defaultAuth.email }}</strong> and password-->
+<!--          <strong>{{ defaultAuth.password }}</strong> to continue.-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-container>-->
+
+    <ng-container *ngIf="hasError">
+      <div class="mb-lg-15 alert alert-danger">
+        <div class="alert-text font-weight-bold">
+          The login details are incorrect
+        </div>
+      </div>
+    </ng-container>
+
+
+
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="mb-3 mt-5 ">
+        <ng-container *ngIf="logo">
+        <h2 class="text-gray-800 text-center">External User Login</h2>
+        </ng-container>
+        <ng-container *ngIf="!logo">
+          <br><br><br><br><br>
+          <a class="text-center mt-5" href="" >
+            <img src="./assets/media/logos/brac_full_logo.png" height="52px" alt="">
+          </a>
+          <br><br><br><br><br>
+         </ng-container>
+        <br>
+        <form class="px-2" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form" (ngSubmit)="submit()">
+          <div class="input-group has-validation">
+            <input class="form-control border px-3 mb-2 is-valid" type="text" formControlName= "username" name="username"  placeholder="username"
+            [ngClass]="{
+              'is-invalid': loginForm.controls['username'].invalid,
+              'is-valid': loginForm.controls['username'].valid
+            }"
+            >
+            <div class="invalid-feedback">
+              <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Username is required',
+                control: loginForm.controls['username']
+              }"></ng-container>
+<!--            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{-->
+<!--                validation: 'email',-->
+<!--                message: 'Email is invalid',-->
+<!--                control: loginForm.controls['email']-->
+<!--              }"></ng-container>-->
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'minLength',
+                message: 'Username should have at least 3 symbols',
+                control: loginForm.controls['username']
+              }"></ng-container>
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'maxLength',
+                message: 'Username should have maximum 360 symbols',
+                control: loginForm.controls['username']
+              }"></ng-container>
+            </div>
+          </div>
+
+          <div class="input-group has-validation">
+            <input class="form-control border px-3 mb-2 is-valid " type="password" name="password" formControlName="password" placeholder="password"
+            [ngClass]="{
+              'is-invalid': loginForm.controls['password'].invalid,
+              'is-valid': loginForm.controls['password'].valid
+            }"
+            >
+            <div class="invalid-feedback">
+              <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Password is required',
+                control: loginForm.controls['password']
+              }"></ng-container>
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'minlength',
+                message: 'Password should have at least 3 symbols',
+                control: loginForm.controls['password']
+              }"></ng-container>
+            <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                validation: 'maxLength',
+                message: 'Password should have maximum 100 symbols',
+                control: loginForm.controls['password']
+              }"></ng-container>
+            </div>
+          </div>
+          <div class="mb-5 mt-5 text-center">
+            <button class="btn btn-pill" type="submit" [disabled]="loginForm.invalid">
+              <ng-container *ngIf="isLoading$ | async">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Please wait...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container *ngIf="(isLoading$ | async) === false">
+                <span class="indicator-label">Sign In</span>
+              </ng-container>
+              <!-- Sign In -->
+            </button>
+          </div>
+        </form>
+
+        <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+          <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+            <div class="fv-plugins-message-container">
+              <span role="alert">
+                {{ message }}
+              </span>
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+</div>
+
+
